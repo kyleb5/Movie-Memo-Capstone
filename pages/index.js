@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import getPopularMovies from '../utils/data/themoviedb';
-import { useAuth } from '../utils/context/authContext';
+import { Container, Row, Col } from 'react-bootstrap';
+import { getPopularMovies } from '../utils/data/themoviedb';
+
 import Movies from '../components/Movies';
 
 function Home() {
-  const { user } = useAuth();
-
   const [movies, setMovies] = useState([]);
 
   const getAllMovies = () => {
@@ -23,23 +22,16 @@ function Home() {
   }, []);
 
   return (
-    <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
-    >
-      <h1>Hello {user.displayName}! </h1>
-      <div>
-        {movies.map((movie) => (
-          <div id={movie.id} key={movie.id}>
-            <Movies movieObj={{ title: movie.title, overview: movie.overview, poster_path: movie.poster_path }} />
-          </div>
+    <Container className="text-center d-flex flex-column justify-content-center align-items-center">
+      <h1>Popular Movies</h1>
+      <Row className="justify-content-center">
+        {movies.slice(0, 4).map((movie) => (
+          <Col xs={6} sm={3} id={movie.id} key={movie.id} style={{ marginBottom: '20px' }}>
+            <Movies movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+          </Col>
         ))}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }
 
