@@ -11,5 +11,10 @@ export default function ViewMovie() {
     getMovieById(id).then(setMovieDetails);
   }, [id]);
 
-  return <div>{movieDetails.title}</div>;
+  return (
+    <div>
+      {movieDetails.title}
+      <p>{movieDetails.overview}</p>
+    </div>
+  );
 }
