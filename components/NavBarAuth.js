@@ -1,9 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import Link from 'next/link';
-import {
-  Navbar, Container, Nav, Button,
-} from 'react-bootstrap';
+// eslint-disable-next-line object-curly-newline
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
 
 export default function NavBarAuth() {
@@ -11,7 +11,9 @@ export default function NavBarAuth() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Link passHref href="/">
-          <Navbar.Brand>CHANGE ME</Navbar.Brand>
+          <Navbar.Brand href="#home">
+            <img src="https://i.imgur.com/5s5vNsG.png" width="125" height="60" className="d-inline-block align-top" alt="Movie Memo Logo" />
+          </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -20,7 +22,9 @@ export default function NavBarAuth() {
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={signOut}>Sign Out</Button>
+            <Button variant="danger" onClick={signOut}>
+              Sign Out
+            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>

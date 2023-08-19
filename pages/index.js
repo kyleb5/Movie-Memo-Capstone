@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { getPopularMovies } from '../utils/data/themoviedb';
-
-import Movies from '../components/Movies';
+import PopularMovies from '../components/PopularMovies';
 
 function Home() {
-  const [movies, setMovies] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
 
-  const getAllMovies = () => {
+  const getAllPopularMovies = () => {
     getPopularMovies()
       .then((movieResults) => {
-        setMovies(movieResults.results);
+        setPopularMovies(movieResults.results);
       })
       .catch((error) => {
         console.warn(error);
@@ -18,16 +17,16 @@ function Home() {
   };
 
   useEffect(() => {
-    getAllMovies();
+    getAllPopularMovies();
   }, []);
 
   return (
     <Container className="text-center d-flex flex-column justify-content-center align-items-center">
       <h1>Popular Movies</h1>
       <Row className="justify-content-center">
-        {movies.slice(0, 4).map((movie) => (
+        {popularMovies.slice(0, 4).map((movie) => (
           <Col xs={6} sm={3} id={movie.id} key={movie.id} style={{ marginBottom: '20px' }}>
-            <Movies movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+            <PopularMovies movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
           </Col>
         ))}
       </Row>
