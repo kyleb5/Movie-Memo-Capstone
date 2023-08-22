@@ -8,10 +8,10 @@ export default function PopularMovies({ movieObj }) {
 
   return (
     <div className="text-center">
-      <b>{movieObj.title}</b>
       <Link href={`/movie/${movieObj.id}`} passHref>
         <Card.Img src={`${imagePath}${movieObj.poster_path}`} />
       </Link>
+      <b>{movieObj.title}</b>
     </div>
   );
 }
