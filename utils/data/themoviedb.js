@@ -11,6 +11,17 @@ const getPopularMovies = () =>
       .catch(reject);
   });
 
+const getPopularMoviesPage = (pageNumber) =>
+  new Promise((resolve, reject) => {
+    fetch(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${pageNumber}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzOTFmNzQzYWExZGM4YTliZjUyMDQ3OTllZTUwZmUxYSIsInN1YiI6IjY0YzA0NTg3NmQ0Yzk3MDBmZjQ5OWQ4YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FrWw_KxHGj6KpZi-C1hbe0ynzxsyw2vSgxu96prCDkA' },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
 const getMovieById = (movieID) =>
   new Promise((resolve, reject) => {
     fetch(`https://api.themoviedb.org/3/movie/${movieID}`, {
@@ -22,4 +33,4 @@ const getMovieById = (movieID) =>
       .catch(reject);
   });
 
-export { getPopularMovies, getMovieById };
+export { getPopularMovies, getMovieById, getPopularMoviesPage };
