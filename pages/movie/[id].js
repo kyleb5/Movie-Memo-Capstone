@@ -12,7 +12,7 @@ export default function ViewMovie() {
   }, [id]);
 
   return (
-    <div>
+    <div className="pushdown-top">
       {movieDetails.title}
       <p>{movieDetails.overview}</p>
     </div>
