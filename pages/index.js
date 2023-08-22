@@ -1,5 +1,7 @@
+/* eslint-disable object-curly-newline */
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import Link from 'next/link';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { getPopularMovies } from '../utils/data/themoviedb';
 import PopularMovies from '../components/PopularMovies';
 
@@ -23,13 +25,18 @@ function Home() {
   return (
     <Container className="text-center d-flex flex-column justify-content-center align-items-center">
       <h1>Popular Movies</h1>
-      <Row className="justify-content-center">
+      <Row>
         {popularMovies.slice(0, 4).map((movie) => (
           <Col xs={6} sm={3} id={movie.id} key={movie.id} style={{ marginBottom: '20px' }}>
             <PopularMovies movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
           </Col>
         ))}
       </Row>
+      <Link href="/movie/popular/1" passHref>
+        <Button variant="danger" size="large">
+          Show More
+        </Button>
+      </Link>
     </Container>
   );
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import Link from 'next/link';
 
-export default function PopularMovies({ movieObj }) {
+export default function PopularMoviesByPage({ movieObj }) {
   const imagePath = 'https://image.tmdb.org/t/p/w300';
 
   return (
@@ -16,7 +16,7 @@ export default function PopularMovies({ movieObj }) {
   );
 }
 
-PopularMovies.propTypes = {
+PopularMoviesByPage.propTypes = {
   movieObj: PropTypes.shape({
     title: PropTypes.string,
     poster_path: PropTypes.string,
