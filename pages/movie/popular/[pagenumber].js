@@ -34,6 +34,7 @@ export default function PopularMoviesPage() {
     }
   };
 
+  // IF movies is undefined OR movies.length is an empty array then --
   if (!movies || movies.length === 0) {
     return (
       <div className="text-center">
