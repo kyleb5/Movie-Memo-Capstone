@@ -9,6 +9,8 @@ export default function TopRatedMoviesPages() {
   const router = useRouter();
   const [movies, setMovies] = useState([]);
   const page = router.query;
+  // page.pagenumber is a string so parsing it into a integer.
+  // I was forced to put 10 as it was missing "radix" which parses it as octal
   const pageNumber = parseInt(page.pagenumber, 10);
   if (pageNumber <= 0) {
     // eslint-disable-next-line no-const-assign
@@ -56,7 +58,7 @@ export default function TopRatedMoviesPages() {
           </Col>
         ))}
       </Row>
-      <Button variant="danger" size="lg" onClick={handlePrevPage}>
+      <Button style={{ marginRight: '10px' }} variant="danger" size="lg" onClick={handlePrevPage}>
         Previous Page
       </Button>
       <Button variant="danger" size="lg" onClick={handleNextPage}>
