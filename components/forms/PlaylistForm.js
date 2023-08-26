@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { useRouter } from 'next/router';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import PropTypes from 'prop-types';
 import { useAuth } from '../../utils/context/authContext';
 import { createPlaylist, updatePlaylist } from '../../utils/data/playlistData';
@@ -8,20 +9,25 @@ import { createPlaylist, updatePlaylist } from '../../utils/data/playlistData';
 const initialState = {
   description: '',
   playlist_name: '',
+  title: '',
 };
 
 function PlaylistForm({ obj }) {
-  //  const [formInput, setFormInput] = useState(initialState);
+  const [formInput, setFormInput] = useState(initialState);
   const router = useRouter();
   const { user } = useAuth();
 
-  /* const handleChange = (e) => {
+  useEffect(() => {
+    if (obj.firebaseKey) setFormInput(obj);
+  }, [obj, user]);
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInput((prevSate) => ({
       ...prevSate,
       [name]: value,
     }));
-  }; */
+  };
 
   const handleSumbit = (e) => {
     e.preventDefault();
@@ -41,6 +47,11 @@ function PlaylistForm({ obj }) {
   return (
     <Form onSumbit={handleSumbit}>
       <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Playlist</h2>
+
+      {/* ENTER PLAYLIST NAME */}
+      <FloatingLabel controlId="floatingInput1" label="Enter Playlist Name" className="mb-3">
+        <Form.Control type="text" placeholder="Enter a title" name="title" value={formInput.title} onChange={handleChange} required />
+      </FloatingLabel>
     </Form>
   );
 }
