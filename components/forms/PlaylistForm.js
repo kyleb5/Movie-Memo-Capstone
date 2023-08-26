@@ -3,14 +3,14 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router'; // Moved this import here
+import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
 import { createPlaylist, updatePlaylist } from '../../utils/data/playlistData';
 
 const initialState = {
   description: '',
   title: '',
-  category: '', // Added category to initialState
+  category: '',
 };
 
 function PlaylistForm({ obj }) {
