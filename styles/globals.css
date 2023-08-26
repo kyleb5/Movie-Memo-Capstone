@@ -25,12 +25,11 @@ body {
   margin-top: 20px;
 }
 
-hr {
-  border: 0;
-  clear:both;
-  display:block;
-  width: 96%;               
-  background-color:#000000;
-  height: 1px;
+.image-style {
+  object-position: center top;
+  object-fit: cover;
+  height: 55vh;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
