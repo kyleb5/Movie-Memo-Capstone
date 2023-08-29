@@ -3,15 +3,17 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
+import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
 import { getPlaylists } from '../../utils/data/playlistData';
 import { createMovie, updateMovie } from '../../utils/data/movieData';
 import { getMovieById } from '../../utils/data/themoviedb';
 
 const initialState = {
-  isWatchlist: '',
-  isFavorite: '',
-  isWatched: '',
+  apiID: '',
+  watchlist: false,
+  favorite: false,
+  watchedlist: false,
 };
 
 function MovieForm({ obj }) {
@@ -46,7 +48,7 @@ function MovieForm({ obj }) {
     if (obj.firebaseKey) {
       updateMovie(formInput).then(() => router.push(`/movie/${obj.firebaseKey}`));
     } else {
-      const payload = { ...formInput, uid: user.uid };
+      const payload = { ...formInput, uid: user.uid, apiID: id };
       createMovie(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateMovie(patchPayload).then(() => {
@@ -62,10 +64,55 @@ function MovieForm({ obj }) {
 
       <h1>Add {movieDetails.title}</h1>
 
-      <FloatingLabel controlId="floatingSelect" label="Author">
+      <Form.Check
+        className="text-white mb-3"
+        type="switch"
+        id="watchlist"
+        name="watchlist"
+        label="Watchlist"
+        checked={formInput.watchlist}
+        onChange={(e) => {
+          setFormInput((prevState) => ({
+            ...prevState,
+            watchlist: e.target.checked,
+          }));
+        }}
+      />
+
+      <Form.Check
+        className="text-white mb-3"
+        type="switch"
+        id="favorite"
+        name="favorite"
+        label="Favorite"
+        checked={formInput.favorite}
+        onChange={(e) => {
+          setFormInput((prevState) => ({
+            ...prevState,
+            favorite: e.target.checked,
+          }));
+        }}
+      />
+
+      <Form.Check
+        className="text-white mb-3"
+        type="switch"
+        id="watchedlist"
+        name="watchedlist"
+        label="Watchedlist"
+        checked={formInput.watchedlist}
+        onChange={(e) => {
+          setFormInput((prevState) => ({
+            ...prevState,
+            watchedlist: e.target.checked,
+          }));
+        }}
+      />
+
+      <FloatingLabel controlId="floatingSelect" label="Playlist">
         <Form.Select
           aria-label="Playlist"
-          name="firebaseKey"
+          name="playlistID"
           onChange={handleChange}
           className="mb-3"
           value={obj.firebaseKey} // FIXME: modify code to remove error
@@ -79,6 +126,9 @@ function MovieForm({ obj }) {
           ))}
         </Form.Select>
       </FloatingLabel>
+
+      {/* SUBMIT BUTTON  */}
+      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Add'} Movie to Playlist </Button>
     </Form>
   );
 }
@@ -88,6 +138,7 @@ MovieForm.propTypes = {
     isWatchlist: PropTypes.bool,
     isFavorite: PropTypes.bool,
     isWatched: PropTypes.bool,
+    apiID: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
 };
