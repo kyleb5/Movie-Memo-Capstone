@@ -1,9 +1,9 @@
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/context/authContext';
 import { createPlaylist, updatePlaylist } from '../../utils/data/playlistData';
 
@@ -11,6 +11,7 @@ const initialState = {
   description: '',
   title: '',
   category: '',
+  firebaseKey: '',
 };
 
 function PlaylistForm({ obj }) {
@@ -39,7 +40,7 @@ function PlaylistForm({ obj }) {
       createPlaylist(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updatePlaylist(patchPayload).then(() => {
-          router.push(`/playlist/${name}`);
+          router.push('/playlist');
         });
       });
     }
@@ -77,9 +78,9 @@ function PlaylistForm({ obj }) {
 
 PlaylistForm.propTypes = {
   obj: PropTypes.shape({
+    firebaseKey: PropTypes.string,
     category: PropTypes.string,
     name: PropTypes.string,
-    firebaseKey: PropTypes.string,
   }),
 };
 
