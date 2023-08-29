@@ -17,6 +17,19 @@ const getMoviesByUser = (uid) =>
       .catch(reject);
   });
 
+const getSingleMovie = (firebaseKey) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/movie/${firebaseKey}.json`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
 const deleteMovieFromPlaylist = (firebaseKey) =>
   new Promise((resolve, reject) => {
     fetch(`${endpoint}/movie/${firebaseKey}.json`, {
@@ -58,5 +71,18 @@ const updateMovie = (payload) =>
       .catch(reject);
   });
 
+const getMoviesByPlaylist = (firebaseKey) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/movie.json?orderBy="playlistID"&equalTo="${firebaseKey}"`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(Object.values(data)))
+      .catch(reject);
+  });
+
 // eslint-disable-next-line object-curly-newline
-export { getMoviesByUser, deleteMovieFromPlaylist, createMovie, updateMovie };
+export { getMoviesByUser, deleteMovieFromPlaylist, createMovie, updateMovie, getSingleMovie, getMoviesByPlaylist };

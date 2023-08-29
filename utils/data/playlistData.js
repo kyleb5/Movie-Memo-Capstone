@@ -18,6 +18,19 @@ const getPlaylists = (uid) =>
       .catch(reject);
   });
 
+const getPlaylistByMovie = (firebaseKey) =>
+  new Promise((resolve, reject) => {
+    fetch(`${endpoint}/movie.json?orderBy="playlistID"&equalTo="${firebaseKey}"`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(Object.values(data)))
+      .catch(reject);
+  });
+
 // Get SINGLE USER by firebasekey
 const getSinglePlaylist = (firebaseKey) =>
   new Promise((resolve, reject) => {
@@ -77,4 +90,4 @@ const updatePlaylist = (payload) =>
   });
 
 // eslint-disable-next-line object-curly-newline
-export { getPlaylists, deletePlaylist, createPlaylist, updatePlaylist, getSinglePlaylist };
+export { getPlaylists, deletePlaylist, createPlaylist, updatePlaylist, getSinglePlaylist, getPlaylistByMovie };
