@@ -4,10 +4,9 @@ import { clientCredentials } from '../client';
 
 const endpoint = clientCredentials.databaseURL;
 
-// Get USER playlist by there user id
-const getPlaylists = (uid) =>
+const getMoviesByUser = (uid) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/playlist.json?orderBy="uid"&equalTo="${uid}"`, {
+    fetch(`${endpoint}/movie.json?orderBy="uid"&equalTo="${uid}"`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -18,24 +17,9 @@ const getPlaylists = (uid) =>
       .catch(reject);
   });
 
-// Get SINGLE USER by firebasekey
-const getSinglePlaylist = (firebaseKey) =>
+const deleteMovieFromPlaylist = (firebaseKey) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/playlist/${firebaseKey}.json`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => resolve(data))
-      .catch(reject);
-  });
-
-// DELETE playlist
-const deletePlaylist = (firebaseKey) =>
-  new Promise((resolve, reject) => {
-    fetch(`${endpoint}/playlist/${firebaseKey}.json`, {
+    fetch(`${endpoint}/movie/${firebaseKey}.json`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -46,10 +30,9 @@ const deletePlaylist = (firebaseKey) =>
       .catch(reject);
   });
 
-// CREATE playlist
-const createPlaylist = (payload) =>
+const createMovie = (payload) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/playlist.json`, {
+    fetch(`${endpoint}/movie.json`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -61,10 +44,9 @@ const createPlaylist = (payload) =>
       .catch(reject);
   });
 
-// UPDATE playlist
-const updatePlaylist = (payload) =>
+const updateMovie = (payload) =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/playlist/${payload.firebaseKey}.json`, {
+    fetch(`${endpoint}/movie/${payload.firebaseKey}.json`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -77,4 +59,4 @@ const updatePlaylist = (payload) =>
   });
 
 // eslint-disable-next-line object-curly-newline
-export { getPlaylists, deletePlaylist, createPlaylist, updatePlaylist, getSinglePlaylist };
+export { getMoviesByUser, deleteMovieFromPlaylist, createMovie, updateMovie };

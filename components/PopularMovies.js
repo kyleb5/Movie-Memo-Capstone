@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 import Link from 'next/link';
 
 export default function PopularMovies({ movieObj }) {
-  const imagePath = 'https://image.tmdb.org/t/p/w300';
+  const imagePath = 'https://image.tmdb.org/t/p/w300/';
 
   return (
     <div className="text-center">
