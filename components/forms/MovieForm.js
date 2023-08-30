@@ -13,7 +13,7 @@ const initialState = {
   apiID: '',
   watchlist: false,
   favorite: false,
-  watchedlist: false,
+  watched: false,
 };
 
 function MovieForm({ obj }) {
@@ -97,14 +97,14 @@ function MovieForm({ obj }) {
       <Form.Check
         className="text-white mb-3"
         type="switch"
-        id="watchedlist"
-        name="watchedlist"
-        label="Watchedlist"
-        checked={formInput.watchedlist}
+        id="watched"
+        name="watched"
+        label="Watched"
+        checked={formInput.watched}
         onChange={(e) => {
           setFormInput((prevState) => ({
             ...prevState,
-            watchedlist: e.target.checked,
+            watched: e.target.checked,
           }));
         }}
       />
@@ -121,7 +121,7 @@ function MovieForm({ obj }) {
           <option value="">Select an Playlist</option>
           {playlist.map((playlists) => (
             <option key={playlists.firebaseKey} value={playlists.firebaseKey}>
-              {playlists.title} {playlists.description}
+              {playlists.title}
             </option>
           ))}
         </Form.Select>

@@ -28,6 +28,7 @@ body {
 .image-style {
   object-position: center top;
   object-fit: cover;
+  /* VH = view point can be used as percentages as well */
   height: 55vh;
   width: 100%;
   margin-bottom: 1rem;

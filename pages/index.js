@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { getPopularMovies, getTopRatedMovies } from '../utils/data/themoviedb';
-import PopularMovies from '../components/PopularMovies';
+import PopularMovies from '../components/MoviePosterCard';
 import TopRatedMovies from '../components/TopRatedMovies';
 
 function Home() {

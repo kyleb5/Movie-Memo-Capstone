@@ -1,4 +1,4 @@
-import { getSingleMovie } from './movieData';
+import { getMoviesByPlaylist } from './movieData';
 import { getSinglePlaylist } from './playlistData';
 
 const viewPlaylistDetails = (playlistFirebaseKey) =>
@@ -6,7 +6,7 @@ const viewPlaylistDetails = (playlistFirebaseKey) =>
   new Promise((resolve, reject) => {
     getSinglePlaylist(playlistFirebaseKey)
       .then((playlistObject) => {
-        getSingleMovie(playlistObject.firebaseKey).then((movieObject) => {
+        getMoviesByPlaylist(playlistObject.firebaseKey).then((movieObject) => {
           resolve({ movieObject, ...playlistObject });
         });
       })
