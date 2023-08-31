@@ -5,7 +5,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { getPlaylists } from '../../utils/data/playlistData';
+import { getPlaylistByMovie, getPlaylists } from '../../utils/data/playlistData';
 import { createMovie, updateMovie } from '../../utils/data/movieData';
 import { getMovieById } from '../../utils/data/themoviedb';
 
@@ -43,12 +43,21 @@ function MovieForm({ obj }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (obj.firebaseKey) {
+    const payload = { ...formInput, uid: user.uid, apiID: id };
+    const getPlaylistInfo = await getPlaylistByMovie(payload.playlistID);
+    // console.warn(typeof getPlaylistInfo);
+    // https://medium.com/poka-techblog/simplify-your-javascript-use-some-and-find-f9fb9826ddfd
+    // Example: const listHasPilots = operatives.some(operative => operative.pilot);
+    // This array method helps you determine if one or more of its values correspond to something you’re looking for.
+    const matches = getPlaylistInfo.some((playlistMovie) => playlistMovie.apiID === payload.apiID);
+    if (matches) {
+      alert('MOVIE IS ALREADY IN PLAYLIST \n Please check the playlist you selected.');
+    } else if (obj.firebaseKey) {
       updateMovie(formInput).then(() => router.push(`/movie/${obj.firebaseKey}`));
     } else {
-      const payload = { ...formInput, uid: user.uid, apiID: id };
+      // console.warn(typeof payload.playlistID);
       createMovie(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateMovie(patchPayload).then(() => {
@@ -60,9 +69,9 @@ function MovieForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Movie</h2>
-
-      <h1>Add {movieDetails.title}</h1>
+      <h2 className="text-white mt-5">
+        {obj.firebaseKey ? 'Update' : 'Create'} {movieDetails.title}
+      </h2>
 
       <Form.Check
         className="text-white mb-3"
@@ -138,6 +147,7 @@ MovieForm.propTypes = {
     isWatchlist: PropTypes.bool,
     isFavorite: PropTypes.bool,
     isWatched: PropTypes.bool,
+    playlistID: PropTypes.string,
     apiID: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
