@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { getPopularMovies, getTopRatedMovies } from '../utils/data/themoviedb';
-import PopularMovies from '../components/PopularMovies';
+import MoviePosterCard from '../components/MoviePosterCard';
 import TopRatedMovies from '../components/TopRatedMovies';
 
 function Home() {
@@ -42,7 +42,7 @@ function Home() {
       <Row>
         {popularMovies.slice(0, 4).map((movie) => (
           <Col xs={6} sm={3} id={movie.id} key={movie.id} style={{ marginBottom: '20px' }}>
-            <PopularMovies movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+            <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
           </Col>
         ))}
       </Row>
