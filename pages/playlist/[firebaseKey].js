@@ -3,9 +3,11 @@ import { useRouter } from 'next/router';
 import { Col, Container, Row } from 'react-bootstrap';
 import { getPlaylistByMovie } from '../../utils/data/playlistData';
 import { getMovieById } from '../../utils/data/themoviedb';
-import MoviePosterCard from '../../components/MoviePosterCard';
+import PlaylistMovieCard from '../../components/PlaylistMovieCard';
 
 export default function ViewPlaylist() {
+  // https://stackoverflow.com/questions/44566340/show-a-component-on-hover-in-reactjs
+  // CALL COMPONENTS ON HOVER ^
   const [movies, setMovies] = useState([]);
   const router = useRouter();
   const { firebaseKey } = router.query;
@@ -30,7 +32,7 @@ export default function ViewPlaylist() {
           // checks if all movies have been processed then sets the movies as updated
           if (movieDetail.length === playlistMovies.length) {
             setMovies(movieDetail); // Use movieDetail here
-            console.warn(movieDetail);
+            // console.warn(movieDetail);
           }
         };
 
@@ -39,20 +41,11 @@ export default function ViewPlaylist() {
     }
   }, [firebaseKey]);
 
-  console.warn(movies);
+  // console.warn(movies);
 
   return (
     <Container className="text-center pushdown-top">
       <div>
-        {movies.map((movie) => (
-          <div key={movie.id}>
-            <h2>{movie.title}</h2>
-            <p>Movie ID: {movie.apiID}</p>
-            <p>Is Favorite: {movie.favorite ? 'Yes' : 'No'}</p>
-            <p>Is on Watchlist: {movie.watchlist ? 'Yes' : 'No'}</p>
-            <p>Has Watched: {movie.watched ? 'Yes' : 'No'}</p>
-          </div>
-        ))}
         <div>
           <h1>Favorite</h1>
           <Row>
@@ -61,7 +54,14 @@ export default function ViewPlaylist() {
               .filter((movie) => movie.favorite)
               .map((movie) => (
                 <Col xs={6} sm={3} key={movie.id} style={{ marginBottom: '20px' }}>
-                  <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+                  <PlaylistMovieCard
+                    movieObj={{
+                      title: movie.title,
+                      id: movie.id,
+                      poster_path: movie.poster_path,
+                      firebaseKey: movie.firebaseKey,
+                    }}
+                  />
                 </Col>
               ))}
           </Row>
@@ -74,7 +74,14 @@ export default function ViewPlaylist() {
               .filter((movie) => movie.watched)
               .map((movie) => (
                 <Col xs={6} sm={3} key={movie.id} style={{ marginBottom: '20px' }}>
-                  <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+                  <PlaylistMovieCard
+                    movieObj={{
+                      title: movie.title,
+                      id: movie.id,
+                      poster_path: movie.poster_path,
+                      firebaseKey: movie.firebaseKey,
+                    }}
+                  />
                 </Col>
               ))}
           </Row>
@@ -87,7 +94,14 @@ export default function ViewPlaylist() {
               .filter((movie) => movie.watchlist)
               .map((movie) => (
                 <Col xs={6} sm={3} key={movie.id} style={{ marginBottom: '20px' }}>
-                  <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+                  <PlaylistMovieCard
+                    movieObj={{
+                      title: movie.title,
+                      id: movie.id,
+                      poster_path: movie.poster_path,
+                      firebaseKey: movie.firebaseKey,
+                    }}
+                  />
                 </Col>
               ))}
           </Row>

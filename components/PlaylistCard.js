@@ -16,6 +16,7 @@ function PlaylistCard({ playlistObj, onUpdate }) {
       <Card.Body>
         <Card.Title>{playlistObj.title}</Card.Title>
         <Card.Text>{playlistObj.description}</Card.Text>
+        <Card.Text>{playlistObj.category}</Card.Text>
         {/* DYNAMIC LINK TO VIEW THE PLAYLIST DETAILS  */}
         <Link href={`/playlist/${playlistObj.firebaseKey}`} passHref>
           <Button variant="primary" className="m-2">
@@ -39,6 +40,7 @@ PlaylistCard.propTypes = {
     title: PropTypes.string,
     firebaseKey: PropTypes.string,
     description: PropTypes.string,
+    category: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
