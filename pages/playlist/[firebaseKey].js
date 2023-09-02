@@ -19,8 +19,8 @@ export default function ViewPlaylist() {
         // When I was had 1 movie left I tried the else setMovie([]), that did not work properly but this if statement seem to do the trick. If
         // playlistMovies length is 0 it will set the state as nothing and end the getMovieDetails early.
         if (playlistMovies.length === 0) {
-          setMovies([]); // Set movies state to an empty array
-          return; // Will stop function from running
+          setMovies([]);
+          return;
         }
 
         // MUST ASYNC AWAIT, movies didn't load properly without it
