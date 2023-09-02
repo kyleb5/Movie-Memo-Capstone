@@ -65,7 +65,7 @@ function MovieForm({ obj }) {
       createMovie(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateMovie(patchPayload).then(() => {
-          router.push('/');
+          router.push(`/playlist/${formInput.playlistID}`);
         });
       });
     }
