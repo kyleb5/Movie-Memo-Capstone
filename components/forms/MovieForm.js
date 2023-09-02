@@ -53,7 +53,7 @@ function MovieForm({ obj }) {
     // This array method helps you determine if one or more of its values correspond to something you’re looking for.
     const matches = getPlaylistInfo.some((playlistMovie) => playlistMovie.apiID === payload.apiID);
     if (matches) {
-      alert('MOVIE IS ALREADY IN PLAYLIST \n Please check the playlist you selected.');
+      alert('MOVIE IS ALREADY IN PLAYLIST \nPlease check the playlist you selected.');
     } else if (obj.firebaseKey) {
       updateMovie(formInput).then(() => router.push(`/movie/${obj.firebaseKey}`));
     } else {
