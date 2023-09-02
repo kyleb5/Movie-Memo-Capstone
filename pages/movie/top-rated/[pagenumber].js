@@ -11,7 +11,7 @@ export default function TopRatedMoviesPages() {
   const page = router.query;
   // page.pagenumber is a string so parsing it into a integer.
   // I was forced to put 10 as it was missing "radix" which parses it as octal
-  const pageNumber = parseInt(page.pagenumber, 10);
+  let pageNumber = parseInt(page.pagenumber, 10);
   if (pageNumber <= 0) {
     // eslint-disable-next-line no-const-assign
     pageNumber = 1;

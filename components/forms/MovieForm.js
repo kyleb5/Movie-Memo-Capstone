@@ -14,6 +14,7 @@ const initialState = {
   watchlist: false,
   favorite: false,
   watched: false,
+  firebaseKey: '',
 };
 
 function MovieForm({ obj }) {
@@ -27,13 +28,16 @@ function MovieForm({ obj }) {
   const { user } = useAuth();
 
   useEffect(() => {
+    console.warn(obj);
+    if (obj.firebaseKey) setFormInput(obj);
+  }, [obj]);
+
+  useEffect(() => {
     getPlaylists(user.uid).then(setPlaylist);
     if (id) {
       getMovieById(id).then(setMovieDetails);
     }
-
-    if (obj.firebaseKey) setFormInput(obj);
-  }, [obj, user, id]);
+  }, [user, id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,16 +56,16 @@ function MovieForm({ obj }) {
     // Example: const listHasPilots = operatives.some(operative => operative.pilot);
     // This array method helps you determine if one or more of its values correspond to something you’re looking for.
     const matches = getPlaylistInfo.some((playlistMovie) => playlistMovie.apiID === payload.apiID);
-    if (matches) {
+    if (obj.firebaseKey) {
+      updateMovie(formInput).then(() => router.push(`/playlist/${formInput.playlistID}`));
+    } else if (matches) {
       alert('MOVIE IS ALREADY IN PLAYLIST \nPlease check the playlist you selected.');
-    } else if (obj.firebaseKey) {
-      updateMovie(formInput).then(() => router.push(`/movie/${obj.firebaseKey}`));
     } else {
       // console.warn(typeof payload.playlistID);
       createMovie(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateMovie(patchPayload).then(() => {
-          router.push('/'); // TODO: UPDATE THIS LATER
+          router.push(`/playlist/${formInput.playlistID}`);
         });
       });
     }
@@ -124,7 +128,7 @@ function MovieForm({ obj }) {
           name="playlistID"
           onChange={handleChange}
           className="mb-3"
-          value={obj.firebaseKey} // FIXME: modify code to remove error
+          value={formInput.playlistID} // FIXME: modify code to remove error
           required
         >
           <option value="">Select an Playlist</option>

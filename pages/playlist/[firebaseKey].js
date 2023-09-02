@@ -3,56 +3,59 @@ import { useRouter } from 'next/router';
 import { Col, Container, Row } from 'react-bootstrap';
 import { getPlaylistByMovie } from '../../utils/data/playlistData';
 import { getMovieById } from '../../utils/data/themoviedb';
-import MoviePosterCard from '../../components/MoviePosterCard';
+import PlaylistMovieCard from '../../components/PlaylistMovieCard';
 
 export default function ViewPlaylist() {
   const [movies, setMovies] = useState([]);
   const router = useRouter();
   const { firebaseKey } = router.query;
 
-  /* useEffect(() => {
-    getPlaylistByMovie(firebaseKey).then(setMovies);
-  }, [firebaseKey]); */
-
-  useEffect(() => {
+  const getMovieDetails = () => {
     if (firebaseKey) {
       // Getting the movies of the playlist that match the playlist firebase key
       getPlaylistByMovie(firebaseKey).then((playlistMovies) => {
         const movieDetail = [];
 
+        // When I was had 1 movie left I tried the else setMovie([]), that did not work properly but this if statement seem to do the trick. If
+        // playlistMovies length is 0 it will set the state as nothing and end the getMovieDetails early.
+        if (playlistMovies.length === 0) {
+          setMovies([]); // Set movies state to an empty array
+          return; // Will stop function from running
+        }
+
         // MUST ASYNC AWAIT, movies didn't load properly without it
         const processMovie = async (movie) => {
           const movieData = await getMovieById(movie.apiID);
-          // merging movie data with movie details from firebase using spread syntax
+          // merging movie data with movie details from firebase using spread operator
           const movieDetails = { ...movie, ...movieData };
           movieDetail.push(movieDetails);
 
           // checks if all movies have been processed then sets the movies as updated
           if (movieDetail.length === playlistMovies.length) {
-            setMovies(movieDetail); // Use movieDetail here
-            console.warn(movieDetail);
+            setMovies(movieDetail);
           }
         };
 
         playlistMovies.forEach(processMovie);
       });
+    } else {
+      setMovies([]);
     }
-  }, [firebaseKey]);
+  };
 
-  console.warn(movies);
+  useEffect(() => {
+    getMovieDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const updateCards = () => {
+    getMovieDetails();
+  };
+  // console.warn(movies);
 
   return (
     <Container className="text-center pushdown-top">
       <div>
-        {movies.map((movie) => (
-          <div key={movie.id}>
-            <h2>{movie.title}</h2>
-            <p>Movie ID: {movie.apiID}</p>
-            <p>Is Favorite: {movie.favorite ? 'Yes' : 'No'}</p>
-            <p>Is on Watchlist: {movie.watchlist ? 'Yes' : 'No'}</p>
-            <p>Has Watched: {movie.watched ? 'Yes' : 'No'}</p>
-          </div>
-        ))}
         <div>
           <h1>Favorite</h1>
           <Row>
@@ -61,7 +64,15 @@ export default function ViewPlaylist() {
               .filter((movie) => movie.favorite)
               .map((movie) => (
                 <Col xs={6} sm={3} key={movie.id} style={{ marginBottom: '20px' }}>
-                  <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+                  <PlaylistMovieCard
+                    movieObj={{
+                      title: movie.title,
+                      id: movie.id,
+                      poster_path: movie.poster_path,
+                      firebaseKey: movie.firebaseKey,
+                    }}
+                    onUpdate={updateCards}
+                  />
                 </Col>
               ))}
           </Row>
@@ -74,7 +85,15 @@ export default function ViewPlaylist() {
               .filter((movie) => movie.watched)
               .map((movie) => (
                 <Col xs={6} sm={3} key={movie.id} style={{ marginBottom: '20px' }}>
-                  <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+                  <PlaylistMovieCard
+                    movieObj={{
+                      title: movie.title,
+                      id: movie.id,
+                      poster_path: movie.poster_path,
+                      firebaseKey: movie.firebaseKey,
+                    }}
+                    onUpdate={updateCards}
+                  />
                 </Col>
               ))}
           </Row>
@@ -87,7 +106,15 @@ export default function ViewPlaylist() {
               .filter((movie) => movie.watchlist)
               .map((movie) => (
                 <Col xs={6} sm={3} key={movie.id} style={{ marginBottom: '20px' }}>
-                  <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+                  <PlaylistMovieCard
+                    movieObj={{
+                      title: movie.title,
+                      id: movie.id,
+                      poster_path: movie.poster_path,
+                      firebaseKey: movie.firebaseKey,
+                    }}
+                    onUpdate={updateCards}
+                  />
                 </Col>
               ))}
           </Row>
