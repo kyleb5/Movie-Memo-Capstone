@@ -28,7 +28,7 @@ function MovieForm({ obj }) {
   const { user } = useAuth();
 
   useEffect(() => {
-    console.warn(obj);
+    //  console.warn(obj);
     if (obj.firebaseKey) setFormInput(obj);
   }, [obj]);
 

@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Spinner,
-} from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 
 export default function Loading() {
   return (
@@ -9,7 +7,7 @@ export default function Loading() {
       <Spinner
         animation="border"
         style={{
-          color: '#00BF67',
+          color: 'red',
           width: '100px',
           height: '100px',
         }}

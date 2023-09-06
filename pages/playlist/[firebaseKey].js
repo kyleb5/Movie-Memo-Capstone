@@ -11,36 +11,31 @@ export default function ViewPlaylist() {
   const { firebaseKey } = router.query;
 
   const getMovieDetails = () => {
-    if (firebaseKey) {
-      // Getting the movies of the playlist that match the playlist firebase key
-      getPlaylistByMovie(firebaseKey).then((playlistMovies) => {
-        const movieDetail = [];
+    // Getting the movies of the playlist that match the playlist firebase key
+    getPlaylistByMovie(firebaseKey).then((playlistMovies) => {
+      const movieDetail = [];
+      // console.warn(playlistMovies);
 
-        // When I was had 1 movie left I tried the else setMovie([]), that did not work properly but this if statement seem to do the trick. If
-        // playlistMovies length is 0 it will set the state as nothing and end the getMovieDetails early.
-        if (playlistMovies.length === 0) {
-          setMovies([]); // Set movies state to an empty array
-          return; // Will stop function from running
+      // playlistMovies length is 0 it will set the state as nothing and end the getMovieDetails early.
+      if (playlistMovies.length === 0) {
+        setMovies([]);
+        return;
+      }
+      const processMovie = async (movie) => {
+        const movieData = await getMovieById(movie.apiID);
+        // merging movie data with movie details from firebase using spread syntax
+        const movieDetails = { ...movie, ...movieData };
+        // merghe every movie detail to array
+        movieDetail.push(movieDetails);
+
+        // checks if all movies have been processed then sets the movies as updated
+        if (movieDetail.length === playlistMovies.length) {
+          setMovies(movieDetail);
         }
+      };
 
-        // MUST ASYNC AWAIT, movies didn't load properly without it
-        const processMovie = async (movie) => {
-          const movieData = await getMovieById(movie.apiID);
-          // merging movie data with movie details from firebase using spread operator
-          const movieDetails = { ...movie, ...movieData };
-          movieDetail.push(movieDetails);
-
-          // checks if all movies have been processed then sets the movies as updated
-          if (movieDetail.length === playlistMovies.length) {
-            setMovies(movieDetail);
-          }
-        };
-
-        playlistMovies.forEach(processMovie);
-      });
-    } else {
-      setMovies([]);
-    }
+      playlistMovies.forEach(processMovie);
+    });
   };
 
   useEffect(() => {
@@ -80,7 +75,6 @@ export default function ViewPlaylist() {
         <div>
           <h1>Watched</h1>
           <Row>
-            {/* Im using the filter to get the favorite movies as if they are true then mapping over to render them */}
             {movies
               .filter((movie) => movie.watched)
               .map((movie) => (
@@ -99,9 +93,8 @@ export default function ViewPlaylist() {
           </Row>
         </div>
         <div>
-          <h1>Watch List</h1>
+          <h1>Want to Watch</h1>
           <Row>
-            {/* Im using the filter to get the favorite movies as if they are true then mapping over to render them */}
             {movies
               .filter((movie) => movie.watchlist)
               .map((movie) => (
