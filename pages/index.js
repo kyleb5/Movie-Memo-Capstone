@@ -11,23 +11,15 @@ function Home() {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
 
   const getAllPopularMovies = () => {
-    getPopularMovies()
-      .then((movieResults) => {
-        setPopularMovies(movieResults.results);
-      })
-      .catch((error) => {
-        console.warn(error);
-      });
+    getPopularMovies().then((movieResults) => {
+      setPopularMovies(movieResults.results);
+    });
   };
 
   const getAllTopRatedMovies = () => {
-    getTopRatedMovies()
-      .then((movieResults) => {
-        setTopRatedMovies(movieResults.results);
-      })
-      .catch((error) => {
-        console.warn(error);
-      });
+    getTopRatedMovies().then((movieResults) => {
+      setTopRatedMovies(movieResults.results);
+    });
   };
 
   useEffect(() => {
