@@ -70,4 +70,10 @@ const getMovieById = (movieID) =>
       .catch(reject);
   });
 
+// ///////////////////////
+//                      //
+//  SEARCH MOVIES       //
+//                      //
+// ///////////////////////
+
 export { getPopularMovies, getMovieById, getPopularMoviesPage, getTopRatedMovies, getTopRatedMoviesByPage };

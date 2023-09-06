@@ -5,6 +5,7 @@ import Link from 'next/link';
 // eslint-disable-next-line object-curly-newline
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
+import SearchBar from './Search';
 
 export default function NavBarAuth() {
   return (
@@ -18,7 +19,6 @@ export default function NavBarAuth() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            {/* CLOSE NAVBAR ON LINK SELECTION: https://stackoverflow.com/questions/72813635/collapse-on-select-react-bootstrap-navbar-with-nextjs-not-working */}
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
@@ -28,7 +28,10 @@ export default function NavBarAuth() {
             <Link passHref href="/profile">
               <Nav.Link>Profile</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={signOut}>
+          </Nav>
+          <Nav className="ms-auto">
+            <SearchBar />
+            <Button className="mx-2" variant="danger" onClick={signOut}>
               Sign Out
             </Button>
           </Nav>

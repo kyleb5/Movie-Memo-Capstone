@@ -8,7 +8,7 @@ import { deleteMovieFromPlaylist } from '../utils/data/movieData';
 
 function PlaylistMovieCard({ movieObj, onUpdate }) {
   const imagePath = 'https://image.tmdb.org/t/p/w300/';
-  console.warn(movieObj);
+  // console.warn(movieObj);
 
   const deleteThisMovie = () => {
     if (window.confirm(`Delete ${movieObj.title}?`)) {
