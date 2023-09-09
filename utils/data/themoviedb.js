@@ -70,4 +70,21 @@ const getMovieById = (movieID) =>
       .catch(reject);
   });
 
-export { getPopularMovies, getMovieById, getPopularMoviesPage, getTopRatedMovies, getTopRatedMoviesByPage };
+// ///////////////////////
+//                      //
+//  SEARCH MOVIES       //
+//                      //
+// ///////////////////////
+// https://api.themoviedb.org/3/search/movie?query=Batman&include_adult=false&language=en-US&page=1
+const getUserSearch = (searchResult) =>
+  new Promise((resolve, reject) => {
+    fetch(`https://api.themoviedb.org/3/search/movie?query=${searchResult}&include_adult=false&language=en-US&page=1`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', Authorization: `${auth}` },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
+export { getPopularMovies, getMovieById, getPopularMoviesPage, getTopRatedMovies, getTopRatedMoviesByPage, getUserSearch };

@@ -8,7 +8,7 @@ import { deleteMovieFromPlaylist } from '../utils/data/movieData';
 
 function PlaylistMovieCard({ movieObj, onUpdate }) {
   const imagePath = 'https://image.tmdb.org/t/p/w300/';
-  console.warn(movieObj);
+  // console.warn(movieObj);
 
   const deleteThisMovie = () => {
     if (window.confirm(`Delete ${movieObj.title}?`)) {
@@ -24,11 +24,15 @@ function PlaylistMovieCard({ movieObj, onUpdate }) {
       <div>
         <Button variant="edit">
           <Link href={`/movie/edit/${movieObj.firebaseKey}`} passHref>
-            <BiSolidEdit size={30} />
+            <div>
+              <BiSolidEdit size={30} />
+            </div>
           </Link>
         </Button>
         <Button onClick={deleteThisMovie} variant="delete">
-          <BiTrash size={30} />
+          <div>
+            <BiTrash size={30} />
+          </div>
         </Button>
       </div>
       <b>{movieObj.title}</b>

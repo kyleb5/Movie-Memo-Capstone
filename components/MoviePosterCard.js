@@ -9,9 +9,10 @@ export default function MoviePosterCard({ movieObj }) {
   return (
     <div className="text-center">
       <Link href={`/movie/${movieObj.id}`} passHref>
-        <Card.Img src={`${imagePath}${movieObj.poster_path}`} />
+        {movieObj.poster_path ? <Card.Img src={`${imagePath}${movieObj.poster_path}`} alt={movieObj.title} /> : <div>No poster available</div>}
       </Link>
       <b>{movieObj.title}</b>
+      <p>{movieObj.release_date}</p>
     </div>
   );
 }
@@ -21,5 +22,6 @@ MoviePosterCard.propTypes = {
     title: PropTypes.string,
     poster_path: PropTypes.string,
     id: PropTypes.number,
+    release_date: PropTypes.string,
   }).isRequired,
 };
