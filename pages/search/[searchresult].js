@@ -41,6 +41,7 @@ export default function ViewSearchResult() {
   };
   return (
     <Container className="text-center pushdown-top">
+      <h2>Movie Results for {searchResult}</h2>
       {movies.length === 0 ? (
         // Check if there are no movies
         <div>No movies available</div>
