@@ -59,6 +59,34 @@ const getTopRatedMoviesByPage = (pageNumber) =>
       .catch(reject);
   });
 
+// ///////////////////////
+//                      //
+//  Upcoming            //
+//                      //
+// ///////////////////////
+
+const getUpcomingMovies = () =>
+  new Promise((resolve, reject) => {
+    fetch('https://api.themoviedb.org/3/movie/upcoming', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', Authorization: `${auth}` },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
+const getUpcomingMoviesByPage = (pageNumber) =>
+  new Promise((resolve, reject) => {
+    fetch(`https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${pageNumber}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', Authorization: `${auth}` },
+    })
+      .then((response) => response.json())
+      .then((data) => resolve(data))
+      .catch(reject);
+  });
+
 const getMovieById = (movieID) =>
   new Promise((resolve, reject) => {
     fetch(`https://api.themoviedb.org/3/movie/${movieID}`, {
@@ -87,4 +115,4 @@ const getUserSearch = (searchResult, page) =>
       .catch(reject);
   });
 
-export { getPopularMovies, getMovieById, getPopularMoviesPage, getTopRatedMovies, getTopRatedMoviesByPage, getUserSearch };
+export { getPopularMovies, getMovieById, getPopularMoviesPage, getTopRatedMovies, getTopRatedMoviesByPage, getUserSearch, getUpcomingMovies, getUpcomingMoviesByPage };
