@@ -24,11 +24,15 @@ function PlaylistMovieCard({ movieObj, onUpdate }) {
       <div>
         <Button variant="edit">
           <Link href={`/movie/edit/${movieObj.firebaseKey}`} passHref>
-            <BiSolidEdit size={30} />
+            <div>
+              <BiSolidEdit size={30} />
+            </div>
           </Link>
         </Button>
         <Button onClick={deleteThisMovie} variant="delete">
-          <BiTrash size={30} />
+          <div>
+            <BiTrash size={30} />
+          </div>
         </Button>
       </div>
       <b>{movieObj.title}</b>

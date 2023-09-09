@@ -14,7 +14,6 @@ export default function ViewPlaylist() {
     // Getting the movies of the playlist that match the playlist firebase key
     getPlaylistByMovie(firebaseKey).then((playlistMovies) => {
       const movieDetail = [];
-      // console.warn(playlistMovies);
 
       // playlistMovies length is 0 it will set the state as nothing and end the getMovieDetails early.
       if (playlistMovies.length === 0) {
@@ -25,7 +24,7 @@ export default function ViewPlaylist() {
         const movieData = await getMovieById(movie.apiID);
         // merging movie data with movie details from firebase using spread syntax
         const movieDetails = { ...movie, ...movieData };
-        // merghe every movie detail to array
+        // merge every movie detail to the array
         movieDetail.push(movieDetails);
 
         // checks if all movies have been processed then sets the movies as updated
@@ -46,7 +45,6 @@ export default function ViewPlaylist() {
   const updateCards = () => {
     getMovieDetails();
   };
-  // console.warn(movies);
 
   return (
     <Container className="text-center pushdown-top">
@@ -70,6 +68,7 @@ export default function ViewPlaylist() {
                   />
                 </Col>
               ))}
+            {movies.filter((movie) => movie.favorite).length === 0 && <p>None Added</p>}
           </Row>
         </div>
         <div>
@@ -90,6 +89,7 @@ export default function ViewPlaylist() {
                   />
                 </Col>
               ))}
+            {movies.filter((movie) => movie.watched).length === 0 && <p>None Added</p>}
           </Row>
         </div>
         <div>
@@ -110,6 +110,7 @@ export default function ViewPlaylist() {
                   />
                 </Col>
               ))}
+            {movies.filter((movie) => movie.watchlist).length === 0 && <p>None Added</p>}
           </Row>
         </div>
       </div>
