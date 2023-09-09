@@ -7,7 +7,7 @@ export default function SearchBar() {
   const [searchInput, setSearchInput] = useState('');
 
   const handleSearch = () => {
-    console.warn(searchInput);
+    // console.warn(searchInput);
     router.push(`/search/${searchInput}`);
   };
 

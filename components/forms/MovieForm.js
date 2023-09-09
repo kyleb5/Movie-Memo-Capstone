@@ -82,7 +82,7 @@ function MovieForm({ obj }) {
         type="switch"
         id="watchlist"
         name="watchlist"
-        label="Watchlist"
+        label="Want to Watch"
         checked={formInput.watchlist}
         onChange={(e) => {
           setFormInput((prevState) => ({

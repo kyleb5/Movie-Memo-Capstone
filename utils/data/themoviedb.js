@@ -76,9 +76,9 @@ const getMovieById = (movieID) =>
 //                      //
 // ///////////////////////
 // https://api.themoviedb.org/3/search/movie?query=Batman&include_adult=false&language=en-US&page=1
-const getUserSearch = (searchResult) =>
+const getUserSearch = (searchResult, page) =>
   new Promise((resolve, reject) => {
-    fetch(`https://api.themoviedb.org/3/search/movie?query=${searchResult}&include_adult=false&language=en-US&page=1`, {
+    fetch(`https://api.themoviedb.org/3/search/movie?query=${searchResult}&include_adult=false&language=en-US&page=${page}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', Authorization: `${auth}` },
     })

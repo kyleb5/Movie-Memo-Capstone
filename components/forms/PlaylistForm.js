@@ -46,7 +46,7 @@ function PlaylistForm({ obj }) {
     }
   };
 
-  const categoryOptions = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Holiday', 'Musical', 'Mystery', 'Romance', 'Science Fiction', 'Sports', 'Thriller', 'War'];
+  const categoryOptions = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Holiday', 'Musical', 'Mystery', 'Romance', 'Science Fiction', 'Sports', 'Thriller', 'War', 'Other'];
 
   return (
     <Form onSubmit={handleSubmit}>
