@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
+import firebase from 'firebase/app';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
@@ -36,7 +37,7 @@ function PlaylistForm({ obj }) {
     if (obj.firebaseKey) {
       updatePlaylist(formInput).then(() => router.push(`/playlist/${obj.firebaseKey}`));
     } else {
-      const payload = { ...formInput, uid: user.uid };
+      const payload = { ...formInput, uid: user.uid, created: firebase.database.ServerValue.TIMESTAMP };
       createPlaylist(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updatePlaylist(patchPayload).then(() => {
@@ -81,6 +82,7 @@ PlaylistForm.propTypes = {
     firebaseKey: PropTypes.string,
     category: PropTypes.string,
     name: PropTypes.string,
+    createdAt: PropTypes.string,
   }),
 };
 

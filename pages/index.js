@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { getPopularMovies, getTopRatedMovies, getUpcomingMovies } from '../utils/data/themoviedb';
 import MoviePosterCard from '../components/MoviePosterCard';
-import TopRatedMovies from '../components/TopRatedMovies';
 
 function Home() {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -42,7 +41,7 @@ function Home() {
       <Row>
         {popularMovies.slice(0, 4).map((movie) => (
           <Col xs={6} sm={3} id={movie.id} key={movie.id} style={{ marginBottom: '20px' }}>
-            <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+            <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path, release_date: movie.release_date }} />
           </Col>
         ))}
       </Row>
@@ -57,7 +56,7 @@ function Home() {
       <Row>
         {topRatedMovies.slice(0, 4).map((movie) => (
           <Col xs={6} sm={3} id={movie.id} key={movie.id} style={{ marginBottom: '20px' }}>
-            <TopRatedMovies movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+            <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path, release_date: movie.release_date }} />
           </Col>
         ))}
       </Row>
@@ -71,7 +70,7 @@ function Home() {
       <Row>
         {upcomingMovies.slice(0, 4).map((movie) => (
           <Col xs={6} sm={3} id={movie.id} key={movie.id} style={{ marginBottom: '20px' }}>
-            <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+            <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path, release_date: movie.release_date }} />
           </Col>
         ))}
       </Row>

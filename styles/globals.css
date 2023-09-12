@@ -34,3 +34,19 @@ body {
   margin-bottom: 1rem;
 }
 
+.percentage-circle-container {
+  width: 60%;
+  height: 60%;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.vote-average-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
