@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Col, Container, Row } from 'react-bootstrap';
-import { getPlaylistByMovie } from '../../utils/data/playlistData';
+import { getPlaylistByMovie, getSinglePlaylist } from '../../utils/data/playlistData';
 import { getMovieById } from '../../utils/data/themoviedb';
 import PlaylistMovieCard from '../../components/PlaylistMovieCard';
 
 export default function ViewPlaylist() {
   const [movies, setMovies] = useState([]);
+  const [playlistInfo, setPlaylistInfo] = useState([]);
   const router = useRouter();
   const { firebaseKey } = router.query;
 
@@ -37,8 +38,13 @@ export default function ViewPlaylist() {
     });
   };
 
+  const getPlaylistInfo = () => {
+    getSinglePlaylist(firebaseKey).then(setPlaylistInfo);
+  };
+
   useEffect(() => {
     getMovieDetails();
+    getPlaylistInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -46,13 +52,23 @@ export default function ViewPlaylist() {
     getMovieDetails();
   };
 
+  const timestamp = playlistInfo.created;
+  const date = new Date(timestamp);
+
   return (
     <Container className="text-center pushdown-top">
       <div>
+        <div className="container mt-5">
+          <h1 className="display-4">Playlist - {playlistInfo.title}</h1>
+          <p className="lead">Description - {playlistInfo.description}</p>
+          <p>Category - {playlistInfo.category}</p>
+          <p>
+            Created On - {date.getMonth()}/{date.getDate()}/{date.getFullYear()}
+          </p>
+        </div>
         <div>
-          <h1>Favorite</h1>
+          <h1>Favorite Movies</h1>
           <Row>
-            {/* Im using the filter to get the favorite movies as if they are true then mapping over to render them */}
             {movies
               .filter((movie) => movie.favorite)
               .map((movie) => (
@@ -68,11 +84,15 @@ export default function ViewPlaylist() {
                   />
                 </Col>
               ))}
-            {movies.filter((movie) => movie.favorite).length === 0 && <p>None Added</p>}
+            {movies.filter((movie) => movie.favorite).length === 0 && (
+              <Col xs={12} className="mt-3">
+                <p className="text-muted">None Added</p>
+              </Col>
+            )}
           </Row>
         </div>
         <div>
-          <h1>Watched</h1>
+          <h1>Watched Movies</h1>
           <Row>
             {movies
               .filter((movie) => movie.watched)
@@ -89,7 +109,11 @@ export default function ViewPlaylist() {
                   />
                 </Col>
               ))}
-            {movies.filter((movie) => movie.watched).length === 0 && <p>None Added</p>}
+            {movies.filter((movie) => movie.watched).length === 0 && (
+              <Col xs={12} className="mt-3">
+                <p className="text-muted">None Added</p>
+              </Col>
+            )}
           </Row>
         </div>
         <div>
@@ -110,7 +134,11 @@ export default function ViewPlaylist() {
                   />
                 </Col>
               ))}
-            {movies.filter((movie) => movie.watchlist).length === 0 && <p>None Added</p>}
+            {movies.filter((movie) => movie.watchlist).length === 0 && (
+              <Col xs={12} className="mt-3">
+                <p className="text-muted">None Added</p>
+              </Col>
+            )}
           </Row>
         </div>
       </div>
