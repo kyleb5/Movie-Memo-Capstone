@@ -22,7 +22,7 @@ export default function ViewMovie() {
   // eslint-disable-next-line react/prop-types
   function VoteAvgCircle({ voteAverage }) {
     // Get the average out of 10
-    const percentage = (voteAverage / 10) * 100;
+    const percentage = ((voteAverage / 10) * 100).toFixed(1);
     // value={percentage}
     // text={`${percentage.toFixed(1)}%`}
     return (
@@ -48,7 +48,7 @@ export default function ViewMovie() {
     );
   }
 
-  const roundVoteAverage = (movieDetails.vote_average / 10) * 100;
+  const roundVoteAverage = ((movieDetails.vote_average / 10) * 100).toFixed(1);
   return (
     <div>
       <div className="image-container">
@@ -58,13 +58,20 @@ export default function ViewMovie() {
       <div className="text-center">
         <h1 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{movieDetails.title}</h1>
         <p style={{ fontSize: '1rem' }}>{movieDetails.overview}</p>
+        <div style={{ width: '50%', margin: '0 auto' }}>
+          <hr style={{ width: '100%' }} />
+        </div>
+        <h3>Reviews</h3>
         <div className="vote-average-container">
           <VoteAvgCircle id="push-right" voteAverage={movieDetails.vote_average} />
           <p>
             Voting Average {roundVoteAverage} out of 100 from {movieDetails.vote_count} votes
           </p>
         </div>
-        {movieDetails.budget && movieDetails.revenue && (
+        <div style={{ width: '50%', margin: '0 auto' }}>
+          <hr style={{ width: '100%' }} />
+        </div>
+        {movieDetails.budget > 0 && movieDetails.revenue > 0 && (
           <p>
             <b>Budget</b> - ${movieDetails.budget} <b>Revenue</b> - ${movieDetails.revenue}
           </p>

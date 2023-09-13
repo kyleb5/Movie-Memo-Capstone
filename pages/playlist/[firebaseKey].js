@@ -63,7 +63,7 @@ export default function ViewPlaylist() {
           <p className="lead">Description - {playlistInfo.description}</p>
           <p>Category - {playlistInfo.category}</p>
           <p>
-            Created On - {date.getMonth()}/{date.getDate()}/{date.getFullYear()}
+            Created On - {date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()}
           </p>
         </div>
         <div>
