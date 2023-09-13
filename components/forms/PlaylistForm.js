@@ -50,30 +50,34 @@ function PlaylistForm({ obj }) {
   const categoryOptions = ['Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Horror', 'Holiday', 'Musical', 'Mystery', 'Romance', 'Science Fiction', 'Sports', 'Thriller', 'War', 'Other'];
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5 container">{obj.firebaseKey ? 'Update' : 'Create'} Playlist</h2>
+    <div className="center-block-container">
+      <Form onSubmit={handleSubmit}>
+        <h2 className="text-white mt-5 container">{obj.firebaseKey ? 'Update' : 'Create'} Playlist</h2>
 
-      <FloatingLabel controlId="floatingInput1" label="Enter Playlist Name" className="mb-3">
-        <Form.Control type="text" placeholder="Enter a title" name="title" value={formInput.title} onChange={handleChange} required />
-      </FloatingLabel>
+        <FloatingLabel controlId="floatingInput1" label="Enter Playlist Name" className="mb-3">
+          <Form.Control type="text" placeholder="Enter a title" name="title" value={formInput.title} onChange={handleChange} required />
+        </FloatingLabel>
 
-      <FloatingLabel controlId="floatingInput2" label="Enter Playlist Description" className="mb-3">
-        <Form.Control type="text" placeholder="Enter a description" name="description" value={formInput.description} onChange={handleChange} required />
-      </FloatingLabel>
+        <FloatingLabel controlId="floatingInput2" label="Enter Playlist Description" className="mb-3">
+          <Form.Control type="text" placeholder="Enter a description" name="description" value={formInput.description} onChange={handleChange} required />
+        </FloatingLabel>
 
-      <FloatingLabel controlId="floatingSelect" label="Category">
-        <Form.Select aria-label="Category" name="category" value={formInput.category} onChange={handleChange} className="mb-3" required>
-          <option value="">Select a Category</option>
-          {categoryOptions.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </Form.Select>
-      </FloatingLabel>
+        <FloatingLabel controlId="floatingSelect" label="Category">
+          <Form.Select aria-label="Category" name="category" value={formInput.category} onChange={handleChange} className="mb-3" required>
+            <option value="">Select a Category</option>
+            {categoryOptions.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </Form.Select>
+        </FloatingLabel>
 
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Playlist</Button>
-    </Form>
+        <Button style={{ marginLeft: '50px' }} type="submit">
+          {obj.firebaseKey ? 'Update' : 'Create'} Playlist
+        </Button>
+      </Form>
+    </div>
   );
 }
 

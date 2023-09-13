@@ -45,8 +45,26 @@ body {
   align-items: center;
 }
 
+.center-block-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.center-block-container button {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.center-block-container input {
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
 .vote-average-container {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.push-down {
+  margin-top: 10rem;
 }

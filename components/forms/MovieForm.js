@@ -72,77 +72,79 @@ function MovieForm({ obj }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">
-        {obj.firebaseKey ? 'Update' : 'Create'} {movieDetails.title}
-      </h2>
+    <div className="center-block-container">
+      <Form onSubmit={handleSubmit}>
+        <h2 className="text-white mt-5">
+          {obj.firebaseKey ? 'Update' : 'Add'} {movieDetails.title}
+        </h2>
 
-      <Form.Check
-        className="text-white mb-3"
-        type="switch"
-        id="watchlist"
-        name="watchlist"
-        label="Want to Watch"
-        checked={formInput.watchlist}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            watchlist: e.target.checked,
-          }));
-        }}
-      />
+        <Form.Check
+          className="text-white mb-3"
+          type="switch"
+          id="watchlist"
+          name="watchlist"
+          label="Want to Watch"
+          checked={formInput.watchlist}
+          onChange={(e) => {
+            setFormInput((prevState) => ({
+              ...prevState,
+              watchlist: e.target.checked,
+            }));
+          }}
+        />
 
-      <Form.Check
-        className="text-white mb-3"
-        type="switch"
-        id="favorite"
-        name="favorite"
-        label="Favorite"
-        checked={formInput.favorite}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            favorite: e.target.checked,
-          }));
-        }}
-      />
+        <Form.Check
+          className="text-white mb-3"
+          type="switch"
+          id="favorite"
+          name="favorite"
+          label="Favorite"
+          checked={formInput.favorite}
+          onChange={(e) => {
+            setFormInput((prevState) => ({
+              ...prevState,
+              favorite: e.target.checked,
+            }));
+          }}
+        />
 
-      <Form.Check
-        className="text-white mb-3"
-        type="switch"
-        id="watched"
-        name="watched"
-        label="Watched"
-        checked={formInput.watched}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            watched: e.target.checked,
-          }));
-        }}
-      />
+        <Form.Check
+          className="text-white mb-3"
+          type="switch"
+          id="watched"
+          name="watched"
+          label="Watched"
+          checked={formInput.watched}
+          onChange={(e) => {
+            setFormInput((prevState) => ({
+              ...prevState,
+              watched: e.target.checked,
+            }));
+          }}
+        />
 
-      <FloatingLabel controlId="floatingSelect" label="Playlist">
-        <Form.Select
-          aria-label="Playlist"
-          name="playlistID"
-          onChange={handleChange}
-          className="mb-3"
-          value={formInput.playlistID} // FIXME: modify code to remove error
-          required
-        >
-          <option value="">Select an Playlist</option>
-          {playlist.map((playlists) => (
-            <option key={playlists.firebaseKey} value={playlists.firebaseKey}>
-              {playlists.title}
-            </option>
-          ))}
-        </Form.Select>
-      </FloatingLabel>
+        <FloatingLabel controlId="floatingSelect" label="Playlist">
+          <Form.Select
+            aria-label="Playlist"
+            name="playlistID"
+            onChange={handleChange}
+            className="mb-3"
+            value={formInput.playlistID} // FIXME: modify code to remove error
+            required
+          >
+            <option value="">Select an Playlist</option>
+            {playlist.map((playlists) => (
+              <option key={playlists.firebaseKey} value={playlists.firebaseKey}>
+                {playlists.title}
+              </option>
+            ))}
+          </Form.Select>
+        </FloatingLabel>
 
-      {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Add'} Movie to Playlist </Button>
-    </Form>
+        {/* SUBMIT BUTTON  */}
+        <Button type="submit">{obj.firebaseKey ? 'Update' : 'Add'} Movie to Playlist </Button>
+      </Form>
+    </div>
   );
 }
 
