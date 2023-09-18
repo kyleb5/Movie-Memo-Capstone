@@ -68,3 +68,22 @@ body {
 .push-down {
   margin-top: 10rem;
 }
+
+.movie-poster-card:hover {
+  background-color: (349, 94%, 58%, 0.34)
+}
+
+.image-container {
+  position: relative;
+}
+
+.back-arrow {
+  position: absolute;
+  top: 10px; 
+  left: 10px;
+  width: 30px; 
+  height: 2rem; 
+  background-color: white;
+  border-radius: 50%;
+  padding: 5px;
+}
