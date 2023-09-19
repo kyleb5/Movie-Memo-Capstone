@@ -1,5 +1,6 @@
-import { getMoviesByPlaylist } from './movieData';
-import { getSinglePlaylist } from './playlistData';
+/* eslint-disable implicit-arrow-linebreak */
+import { deleteMovieFromPlaylist, getMoviesByPlaylist } from './movieData';
+import { getSinglePlaylist, deletePlaylist } from './playlistData';
 
 const viewPlaylistDetails = (playlistFirebaseKey) =>
   // eslint-disable-next-line implicit-arrow-linebreak
@@ -13,4 +14,17 @@ const viewPlaylistDetails = (playlistFirebaseKey) =>
       .catch((error) => reject(error));
   });
 
-export default viewPlaylistDetails;
+const deletePlaylistMovies = (playlistId) =>
+  new Promise((resolve, reject) => {
+    getMoviesByPlaylist(playlistId)
+      .then((moviesArray) => {
+        const deleteMoviePromises = moviesArray.map((movie) => deleteMovieFromPlaylist(movie.firebaseKey));
+
+        Promise.all(deleteMoviePromises).then(() => {
+          deletePlaylist(playlistId).then(resolve);
+        });
+      })
+      .catch((error) => reject(error));
+  });
+
+export { deletePlaylistMovies, viewPlaylistDetails };

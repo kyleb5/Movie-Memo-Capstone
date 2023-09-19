@@ -4,12 +4,12 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
 import { BsPencilSquare, BsTrash, BsFillEyeFill } from 'react-icons/bs';
-import { deletePlaylist } from '../utils/data/playlistData';
+import { deletePlaylistMovies } from '../utils/data/mergedData';
 
 function PlaylistCard({ playlistObj, onUpdate }) {
   const deleteThisPlaylist = () => {
     if (window.confirm(`Delete ${playlistObj.title}?`)) {
-      deletePlaylist(playlistObj.firebaseKey).then(() => onUpdate());
+      deletePlaylistMovies(playlistObj.firebaseKey).then(() => onUpdate());
     }
   };
   return (
