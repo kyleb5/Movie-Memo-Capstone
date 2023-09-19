@@ -13,6 +13,7 @@ function Signin() {
         margin: '0 auto',
       }}
     >
+      <img src="https://i.imgur.com/5s5vNsG.png" className="d-inline-block align-top" alt="Movie Memo Logo" />
       <h1>Hi there!</h1>
       <p>Click the button below to login!</p>
       <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
