@@ -51,9 +51,14 @@ export default function ViewMovie() {
   const roundVoteAverage = ((movieDetails.vote_average / 10) * 100).toFixed(1);
   return (
     <div>
-      <div className="image-container">
+      <div className="image-container" style={{ position: 'relative' }}>
         {/* Conditional Rendering Fixed Error Undefined for Backdrop */}
-        {movieDetails.backdrop_path && <Card.Img className="image-style" src={`${imagePath}${movieDetails.backdrop_path}`} draggable="false" />}
+        {movieDetails.backdrop_path && (
+          <>
+            <Card.Img className="back-arrow" src="https://i.imgur.com/Qk9Kspj.png" onClick={() => router.back()} alt="Back" />
+            <Card.Img className="image-style" src={`${imagePath}${movieDetails.backdrop_path}`} draggable="false" />
+          </>
+        )}
       </div>
       <div className="text-center">
         <h1 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{movieDetails.title}</h1>

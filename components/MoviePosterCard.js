@@ -9,20 +9,14 @@ export default function MoviePosterCard({ movieObj }) {
   return (
     <div className="text-center">
       <Link href={`/movie/${movieObj.id}`} passHref>
-        {movieObj.poster_path ? (
-          <Card.Img
-            src={`${imagePath}${movieObj.poster_path}`}
-            alt={movieObj.title}
-            style={{
-              boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.5)',
-            }}
-          />
-        ) : (
-          <div className="push-down">No poster available</div>
-        )}
+        <div className="movie-card">
+          {movieObj.poster_path ? <Card.Img draggable="false" src={`${imagePath}${movieObj.poster_path}`} alt={movieObj.title} /> : <div className="no-poster">No poster available</div>}
+          <div className="movie-info">
+            <b>{movieObj.title}</b>
+            <p>{movieObj.release_date}</p>
+          </div>
+        </div>
       </Link>
-      <b>{movieObj.title}</b>
-      <p>{movieObj.release_date}</p>
     </div>
   );
 }

@@ -17,10 +17,11 @@ function PlaylistMovieCard({ movieObj, onUpdate }) {
   };
 
   return (
-    <div className="text-center">
+    <div className="text-center movie-card">
       <Link href={`/movie/${movieObj.id}`} passHref>
-        <Card.Img src={`${imagePath}${movieObj.poster_path}`} />
+        <Card.Img draggable="false" src={`${imagePath}${movieObj.poster_path}`} />
       </Link>
+      <b>{movieObj.title}</b>
       <div>
         <Button variant="edit">
           <Link href={`/movie/edit/${movieObj.firebaseKey}`} passHref>
@@ -35,7 +36,6 @@ function PlaylistMovieCard({ movieObj, onUpdate }) {
           </div>
         </Button>
       </div>
-      <b>{movieObj.title}</b>
     </div>
   );
 }
