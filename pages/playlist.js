@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Button } from 'react-bootstrap';
+import { Button, Row } from 'react-bootstrap';
 import { useAuth } from '../utils/context/authContext';
 import { getPlaylists } from '../utils/data/playlistData';
 import PlaylistCard from '../components/PlaylistCard';
@@ -23,10 +23,12 @@ export default function Playlist() {
       <Link href="/playlist/new" passHref>
         <Button>Create a Playlist</Button>
       </Link>
-      <div className="d-flex flex-wrap">
-        {playlists.map((playlist) => (
-          <PlaylistCard key={playlist.firebaseKey} playlistObj={playlist} onUpdate={getAllThePlaylists} />
-        ))}
+      <div className="d-flex flex-wrap container">
+        <Row>
+          {playlists.map((playlist) => (
+            <PlaylistCard key={playlist.firebaseKey} playlistObj={playlist} onUpdate={getAllThePlaylists} />
+          ))}
+        </Row>
       </div>
     </div>
   );

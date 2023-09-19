@@ -1,9 +1,10 @@
+/* eslint-disable object-curly-newline */
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import { Col, Container, Row } from 'react-bootstrap';
 import { getPopularMoviesPage } from '../../../utils/data/themoviedb';
-import PopularMoviesByPage from '../../../components/PopularMoviesByPage';
+import MoviePosterCard from '../../../components/MoviePosterCard';
 
 export default function PopularMoviesPage() {
   const router = useRouter();
@@ -53,7 +54,7 @@ export default function PopularMoviesPage() {
         {movies.map((movie) => (
           <Col xs={6} sm={3} key={movie.id} style={{ marginBottom: '20px' }}>
             <div key={movie.id}>
-              <PopularMoviesByPage movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path }} />
+              <MoviePosterCard movieObj={{ title: movie.title, id: movie.id, poster_path: movie.poster_path, release_date: movie.release_date }} />
             </div>
           </Col>
         ))}
