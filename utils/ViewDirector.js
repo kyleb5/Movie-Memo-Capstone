@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useAuth } from './context/authContext';
 import Loading from '../components/Loading';
+import FooterBarAuth from '../components/FooterBarAuth';
 import Signin from '../components/Signin';
 import NavBarAuth from '../components/NavBarAuth';
 
@@ -20,6 +21,7 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
         <div>
           <Component {...pageProps} />
         </div>
+        <FooterBarAuth />
       </>
     );
   }
