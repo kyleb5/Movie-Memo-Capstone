@@ -6,10 +6,10 @@ export default function UserProfile() {
   const { user } = useAuth();
   return (
     <div className="center-container">
-      <h1>{user.displayName}</h1>
-      <h3>{user.email}</h3>
+      <h1>Hello, {user.displayName}</h1>
       <img src={user.photoURL} alt="User" />
-      <h4>{user.metadata.lastSignInTime}</h4>
+      <h3>Logged in as: {user.email}</h3>
+      <h4>Last Known Logged in Date: {user.metadata.lastSignInTime}</h4>
     </div>
   );
 }
