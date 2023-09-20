@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
 import SearchBar from './Search';
-
+// Navbar
 export default function NavBarAuth() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
