@@ -22,8 +22,17 @@ export default function NavBarAuth() {
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
+            <Link href="/movie/popular/1" passHref>
+              <Nav.Link>Popular</Nav.Link>
+            </Link>
+            <Link href="/movie/top-rated/1" passHref>
+              <Nav.Link>Top Rated</Nav.Link>
+            </Link>
+            <Link href="/movie/upcoming/1" passHref>
+              <Nav.Link>Upcoming</Nav.Link>
+            </Link>
             <Link passHref href="/playlist">
-              <Nav.Link>Playlist</Nav.Link>
+              <Nav.Link>Playlists</Nav.Link>
             </Link>
             <Link passHref href="/profile">
               <Nav.Link>Profile</Nav.Link>
