@@ -46,7 +46,7 @@ function Home() {
         ))}
       </Row>
       <Link href="/movie/popular/1" passHref>
-        <Button variant="danger" size="large">
+        <Button style={{ marginBottom: '20px' }} variant="danger" size="large">
           Show More
         </Button>
       </Link>
@@ -61,7 +61,7 @@ function Home() {
         ))}
       </Row>
       <Link href="/movie/top-rated/1" passHref>
-        <Button variant="danger" size="large">
+        <Button style={{ marginBottom: '20px' }} variant="danger" size="large">
           Show More
         </Button>
       </Link>
@@ -75,7 +75,7 @@ function Home() {
         ))}
       </Row>
       <Link href="/movie/upcoming/1" passHref>
-        <Button variant="danger" size="large">
+        <Button style={{ marginBottom: '20px' }} variant="danger" size="large">
           Show More
         </Button>
       </Link>
