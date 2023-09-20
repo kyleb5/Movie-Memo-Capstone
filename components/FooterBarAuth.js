@@ -7,7 +7,7 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 // Navbar
 export default function FooterBarAuth() {
   return (
-    <Navbar expand="lg" bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark">
       <Container>
         <Link passHref href="https://developer.themoviedb.org/docs">
           <Navbar.Brand href="#home">
