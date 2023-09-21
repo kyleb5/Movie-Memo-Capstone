@@ -95,3 +95,17 @@ body {
   margin-top: 10rem;
   color: #ccc;
 }
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+.footer-div {
+  flex-shrink: 0;
+}
