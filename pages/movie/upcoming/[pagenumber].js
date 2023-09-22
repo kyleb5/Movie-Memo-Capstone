@@ -60,10 +60,10 @@ export default function UpcomingMoviePage() {
           </Col>
         ))}
       </Row>
-      <Button style={{ marginRight: '10px' }} variant="danger" size="lg" onClick={handlePrevPage}>
+      <Button style={{ marginRight: '10px', marginBottom: '15px' }} variant="danger" size="lg" onClick={handlePrevPage}>
         Previous Page
       </Button>
-      <Button variant="danger" size="lg" onClick={handleNextPage}>
+      <Button style={{ marginBottom: '15px' }} variant="danger" size="lg" onClick={handleNextPage}>
         Next Page
       </Button>
     </Container>

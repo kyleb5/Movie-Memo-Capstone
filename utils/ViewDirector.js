@@ -16,13 +16,15 @@ const ViewDirectorBasedOnUserAuthStatus = ({ component: Component, pageProps }) 
   // what the user should see if they are logged in
   if (user) {
     return (
-      <>
+      <div className="page-container">
         <NavBarAuth /> {/* NavBar only visible if user is logged in and is in every view */}
-        <div>
+        <div className="content">
           <Component {...pageProps} />
         </div>
-        <FooterBarAuth />
-      </>
+        <div className="footer-div">
+          <FooterBarAuth />
+        </div>
+      </div>
     );
   }
 
