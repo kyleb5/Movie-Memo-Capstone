@@ -1,5 +1,5 @@
-Movie Memo 
-<img alt="Movie Memo Landing Page" src="https://i.imgur.com/CPlJ5KA.png">
+# Movie Memo 
+<img alt="Movie Memo Landing Page" src="https://i.imgur.com/IUX2OmE.png">
 #### 2. Make sure YOUR github account is selected in the dropdown and name your project
 <img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
 
