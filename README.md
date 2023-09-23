@@ -5,6 +5,9 @@
 ## Live Website
 [Live Website](https://movie-memo-kb.netlify.app/)
 
+## Live Video Walkthrough of Movie Memo
+[Walkthrough Video](https://www.loom.com/share/92ef33acaa76434f99cefff6de4ffcff?sid=63df8175-bdc8-4741-a21a-3a459d9d794c)
+
 
 ## Starting the Project
 1. Clone the repo on your local machine
