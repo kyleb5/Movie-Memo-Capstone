@@ -39,11 +39,11 @@ export default function ViewSearchResult() {
       setCurrentPage(currentPage - 1);
     }
   };
+
   return (
     <Container className="text-center pushdown-top">
       <h2>Movie Results for {searchResult}</h2>
       {movies.length === 0 ? (
-        // Check if there are no movies
         <div>No movies available</div>
       ) : (
         <div>
@@ -62,13 +62,17 @@ export default function ViewSearchResult() {
               </Col>
             ))}
           </Row>
-          <div>
-            <Button style={{ marginRight: '10px' }} variant="danger" onClick={handlePrevPage}>
-              Previous Page
-            </Button>
-            <Button variant="danger" onClick={handleNextPage}>
-              Next Page
-            </Button>
+          <div className="push-down-bottom">
+            {currentPage > 1 && (
+              <Button style={{ marginRight: '10px' }} variant="danger" onClick={handlePrevPage}>
+                Previous Page
+              </Button>
+            )}
+            {currentPage < totalPages && (
+              <Button variant="danger" onClick={handleNextPage}>
+                Next Page
+              </Button>
+            )}
           </div>
         </div>
       )}

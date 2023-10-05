@@ -109,3 +109,7 @@ body {
 .footer-div {
   flex-shrink: 0;
 }
+
+.push-down-bottom {
+  margin-bottom: 10px;
+}

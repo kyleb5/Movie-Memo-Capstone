@@ -60,11 +60,11 @@ export default function ViewPlaylist() {
       <div>
         <div className="container mt-5">
           <h1 className="display-4">Playlist - {playlistInfo.title}</h1>
-          <p className="lead">Description - {playlistInfo.description}</p>
-          <p>Category - {playlistInfo.category}</p>
-          <p>
+          <h5>Description - {playlistInfo.description}</h5>
+          <h5>Category - {playlistInfo.category}</h5>
+          <h5>
             Created On - {date.getMonth() + 1}/{date.getDate()}/{date.getFullYear()}
-          </p>
+          </h5>
         </div>
         <div>
           <h1>Favorite Movies</h1>
