@@ -70,7 +70,7 @@ function MovieForm({ obj }) {
       });
     }
   };
-
+  // console.warn(movieDetails);
   return (
     <div className="center-block-container">
       <Form onSubmit={handleSubmit}>
